@@ -123,6 +123,8 @@ async def recibir_mensaje_whatsapp(request: Request):
         for entry in body.get("entry", []):
             for cambio in entry.get("changes", []):
                 valor = cambio.get("value", {})
+                metadata = valor.get("metadata", {})
+                id_numero_receptor = metadata.get("phone_number_id")
                 mensajes = valor.get("messages", [])
                 
                 for msj in mensajes:
@@ -145,10 +147,10 @@ async def recibir_mensaje_whatsapp(request: Request):
                     
                     if tipo == "audio":
                         ruta_voz = generar_audio_base(respuesta)
-                        whatsapp_api.enviar_mensaje_texto(numero_origen, respuesta)
-                        whatsapp_api.enviar_mensaje_audio(numero_origen, ruta_voz)
+                        whatsapp_api.enviar_mensaje_texto(numero_origen, respuesta, id_numero_receptor)
+                        whatsapp_api.enviar_mensaje_audio(numero_origen, ruta_voz, id_numero_receptor)
                     else:
-                        whatsapp_api.enviar_mensaje_texto(numero_origen, respuesta)
+                        whatsapp_api.enviar_mensaje_texto(numero_origen, respuesta, id_numero_receptor)
                     
                     logger.info(f"-> [SALIDA] {numero_origen}: {respuesta}")
                     

@@ -36,9 +36,10 @@ def descargar_audio_whatsapp(audio_id: str) -> str:
     print(f"[WhatsApp API] Error descargando audio {audio_id}: {res_info.text}")
     return ""
 
-def enviar_mensaje_texto(numero_destino: str, texto: str):
+def enviar_mensaje_texto(numero_destino: str, texto: str, id_numero: str = None):
     """Envía un mensaje de texto simple de vuelta al cliente de WhatsApp."""
-    if not WHATSAPP_TOKEN or not PHONE_NUMBER_ID:
+    id_final = id_numero or PHONE_NUMBER_ID
+    if not WHATSAPP_TOKEN or not id_final:
         print(f"[Simulador Salida] A {numero_destino}: {texto}")
         return 200
         
@@ -46,7 +47,7 @@ def enviar_mensaje_texto(numero_destino: str, texto: str):
     if numero_destino == "5492216146709":
         numero_destino = "54221156146709"
         
-    url = f"https://graph.facebook.com/{GRAPH_API_VERSION}/{PHONE_NUMBER_ID}/messages"
+    url = f"https://graph.facebook.com/{GRAPH_API_VERSION}/{id_final}/messages"
     payload = {
         "messaging_product": "whatsapp",
         "to": numero_destino,
@@ -56,9 +57,10 @@ def enviar_mensaje_texto(numero_destino: str, texto: str):
     res = requests.post(url, headers=obtener_headers(), json=payload)
     return res.status_code
 
-def enviar_mensaje_audio(numero_destino: str, ruta_audio_local: str):
+def enviar_mensaje_audio(numero_destino: str, ruta_audio_local: str, id_numero: str = None):
     """Sube el audio generado localmente a Meta y se lo envía al cliente de WhatsApp en un solo paso."""
-    if not WHATSAPP_TOKEN or not PHONE_NUMBER_ID:
+    id_final = id_numero or PHONE_NUMBER_ID
+    if not WHATSAPP_TOKEN or not id_final:
         print(f"[Simulador Salida] A {numero_destino}: (Audio MP3 = {ruta_audio_local})")
         return 200
         
@@ -67,7 +69,7 @@ def enviar_mensaje_audio(numero_destino: str, ruta_audio_local: str):
         numero_destino = "54221156146709"
         
     # 1. Subir el archivo multimedia (Audio) a Meta
-    url_media = f"https://graph.facebook.com/{GRAPH_API_VERSION}/{PHONE_NUMBER_ID}/media"
+    url_media = f"https://graph.facebook.com/{GRAPH_API_VERSION}/{id_final}/media"
     headers_media = {"Authorization": f"Bearer {WHATSAPP_TOKEN}"}
     
     try:
@@ -83,7 +85,7 @@ def enviar_mensaje_audio(numero_destino: str, ruta_audio_local: str):
             media_id = res_media.json().get("id")
             
             # 2. Enviar el ID del media como mensaje de voz
-            url_msg = f"https://graph.facebook.com/{GRAPH_API_VERSION}/{PHONE_NUMBER_ID}/messages"
+            url_msg = f"https://graph.facebook.com/{GRAPH_API_VERSION}/{id_final}/messages"
             payload = {
                 "messaging_product": "whatsapp",
                 "to": numero_destino,
