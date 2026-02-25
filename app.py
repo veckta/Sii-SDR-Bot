@@ -34,6 +34,31 @@ VERIFY_TOKEN = "sii_token_secreto_2026"
 def home():
     return {"status": "online", "system": "SII Chatbot Ultra"}
 
+@app.get("/privacidad", response_class=HTMLResponse)
+def privacidad():
+    html = """
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Política de Privacidad - SII</title>
+        <style>body { font-family: Arial; padding: 40px; line-height: 1.6; color: #333; max-width: 800px; margin: auto; }</style>
+    </head>
+    <body>
+        <h1>Política de Privacidad</h1>
+        <p><strong>Última actualización: Febrero 2026</strong></p>
+        <p>Soluciones Inteligentes Integrales (SII) opera el Chatbot Inclusivo SII. Esta página le informa sobre nuestras políticas con respecto a la recopilación, el uso y la divulgación de datos personales cuando utiliza nuestro Servicio.</p>
+        <h2>Recopilación y uso de la información</h2>
+        <p>Recopilamos varios tipos de información con diversos fines para proporcionarle y mejorar nuestro Servicio. Su número de teléfono y el contenido de los mensajes de WhatsApp se utilizan exclusivamente para diagnosticar problemas y proporcionar asistencia técnica pre-aprobada mediante IA.</p>
+        <h2>Retención de datos</h2>
+        <p>Conservaremos sus Datos Personales solo durante el tiempo que sea necesario para los fines establecidos en esta Política de Privacidad.</p>
+        <h2>Contacto</h2>
+        <p>Si tiene alguna pregunta sobre esta Política de Privacidad, por favor contáctenos a través de nuestro WhatsApp oficial.</p>
+    </body>
+    </html>
+    """
+    return html
+
 @app.get("/logs", response_class=HTMLResponse)
 def ver_logs():
     """Dashboard Premium para monitorear el bot en tiempo real"""
