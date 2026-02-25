@@ -10,16 +10,20 @@ from servicios_externos import enviar_resumen_diagnostico
 import whatsapp_api
 import database
 
-# Configuración de logging estándar más robusta
-LOG_FILE = "app_console.log"
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(message)s",
-    handlers=[
-        logging.FileHandler(LOG_FILE, encoding="utf-8"),
-        logging.StreamHandler(sys.stdout)
-    ]
-)
+# Configuración de logging estándar más robusta y compatible con la nube (DigitalOcean usa Linux /tmp/ para escrituras efímeras)
+LOG_FILE = "/tmp/app_console.log" if "linux" in sys.platform else "app_console.log"
+try:
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(message)s",
+        handlers=[
+            logging.FileHandler(LOG_FILE, encoding="utf-8"),
+            logging.StreamHandler(sys.stdout)
+        ]
+    )
+except Exception:
+    logging.basicConfig(level=logging.INFO, format="%(message)s", handlers=[logging.StreamHandler(sys.stdout)])
+
 logger = logging.getLogger("SII-PRO")
 
 app = FastAPI(title="SII Chatbot Pro - Backend")
