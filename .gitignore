@@ -1,0 +1,23 @@
+# Entornos Virtuales e IDEs
+venv/
+env/
+.env
+.vscode/
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Bases de Datos locales y temporales
+sesiones_db.json
+app_console.log
+
+# Archivos de túneles locales
+cloudflared.exe
+tunel_url.txt
+serveo_url.txt
+requerimientos.txt
+
+# Media / Audio local
+*.ogg
+*.mp3

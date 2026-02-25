@@ -1,0 +1,164 @@
+﻿import sys
+import os
+import json
+import logging
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.responses import HTMLResponse, PlainTextResponse
+from motor_ia import client, SYSTEM_PROMPT
+from modulo_audio import transcribir_audio_whisper, generar_audio_base
+from servicios_externos import enviar_resumen_diagnostico
+import whatsapp_api
+import database
+
+# Configuración de logging estándar más robusta
+LOG_FILE = "app_console.log"
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    handlers=[
+        logging.FileHandler(LOG_FILE, encoding="utf-8"),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
+logger = logging.getLogger("SII-PRO")
+
+app = FastAPI(title="SII Chatbot Pro - Backend")
+
+VERIFY_TOKEN = "sii_token_secreto_2026"
+
+@app.get("/")
+def home():
+    return {"status": "online", "system": "SII Chatbot Ultra"}
+
+@app.get("/logs", response_class=HTMLResponse)
+def ver_logs():
+    """Dashboard Premium para monitorear el bot en tiempo real"""
+    try:
+        with open(LOG_FILE, "r", encoding="utf-8") as f:
+            contenido = f.readlines()
+            contenido = "".join(contenido[-100:])
+    except Exception:
+        contenido = "Esperando actividad..."
+    
+    html = f"""
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>SII Command Center</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            :root {{ --bg: #0d0d0d; --green: #00ff41; --text: #e0e0e0; --accent: #007bff; }}
+            body {{ background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 20px; }}
+            .header {{ display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; }}
+            .status {{ background: #1a1a1a; padding: 5px 15px; border-radius: 20px; color: var(--green); font-size: 12px; border: 1px solid var(--green); }}
+            pre {{ background: #151515; padding: 15px; border-radius: 8px; font-size: 13px; line-height: 1.5; overflow-x: auto; border: 1px solid #333; color: #a5a5a5; white-space: pre-wrap; }}
+            .highlight {{ color: var(--green); font-weight: bold; }}
+            .out {{ color: #00ccff; }}
+        </style>
+        <script>
+            setTimeout(() => location.reload(), 3000);
+            window.onload = () => window.scrollTo(0, document.body.scrollHeight);
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h2 style="margin:0; color:white;">⚡ SII <span style="color:var(--accent)">ULTRA</span></h2>
+            <div class="status">🟢 SISTEMA OPERATIVO</div>
+        </div>
+        <pre>{contenido.replace("[TEXTO ENTRANTE]", "<span class='highlight'>[TEXTO ENTRANTE]</span>")}</pre>
+    </body>
+    </html>
+    """
+    return html
+
+@app.get("/webhook")
+def verificar_webhook(request: Request):
+    mode = request.query_params.get("hub.mode")
+    token = request.query_params.get("hub.verify_token")
+    challenge = request.query_params.get("hub.challenge")
+    
+    if mode == "subscribe" and token == VERIFY_TOKEN:
+        logger.info("[WEBHOOK] Verificación exitosa de Meta.")
+        return PlainTextResponse(content=challenge)
+    raise HTTPException(status_code=403, detail="Error de verificación")
+
+@app.post("/webhook")
+async def recibir_mensaje_whatsapp(request: Request):
+    try:
+        body = await request.json()
+        if not body.get("object"): raise HTTPException(status_code=404)
+        
+        for entry in body.get("entry", []):
+            for cambio in entry.get("changes", []):
+                valor = cambio.get("value", {})
+                mensajes = valor.get("messages", [])
+                
+                for msj in mensajes:
+                    numero_origen = msj.get("from")
+                    tipo = msj.get("type")
+                    texto_usuario = ""
+                    
+                    if tipo == "text":
+                        texto_usuario = msj.get("text", {}).get("body", "")
+                        logger.info(f"[TEXTO ENTRANTE] {numero_origen}: {texto_usuario}")
+                    elif tipo == "audio":
+                        audio_id = msj.get("audio", {}).get("id")
+                        logger.info(f"[AUDIO ENTRANTE] {numero_origen}")
+                        ruta = whatsapp_api.descargar_audio_whatsapp(audio_id)
+                        texto_usuario = transcribir_audio_whisper(ruta)
+                        logger.info(f"[TRANSCRIPCIÓN] {texto_usuario}")
+                    else: continue
+
+                    respuesta = procesar_respuesta(numero_origen, texto_usuario)
+                    
+                    if tipo == "audio":
+                        ruta_voz = generar_audio_base(respuesta)
+                        whatsapp_api.enviar_mensaje_texto(numero_origen, respuesta)
+                        whatsapp_api.enviar_mensaje_audio(numero_origen, ruta_voz)
+                    else:
+                        whatsapp_api.enviar_mensaje_texto(numero_origen, respuesta)
+                    
+                    logger.info(f"-> [SALIDA] {numero_origen}: {respuesta}")
+                    
+        return {"status": "ok"}
+    except Exception as e:
+        logger.error(f"[ERROR WEBHOOK] {e}")
+        return {"status": "error"}
+
+def procesar_respuesta(numero, texto):
+    """Maneja el flujo delegando al motor_ia centralizado (Groq/OpenAI)"""
+    import motor_ia
+    historial = database.obtener_mensajes(numero)
+    
+    # Asegurar que el Prompt del Sistema esté actualizado
+    if not historial:
+        database.guardar_mensaje(numero, "system", motor_ia.SYSTEM_PROMPT.strip())
+    elif historial[0]["role"] == "system" and historial[0]["content"].strip() != motor_ia.SYSTEM_PROMPT.strip():
+        # Si el prompt cambió, reseteamos la sesión para aplicar nuevas reglas comerciales
+        logger.info(f"[SISTEMA] Cambio de Prompt detectado para {numero}. Reseteando sesión.")
+        database.borrar_sesion(numero)
+        database.guardar_mensaje(numero, "system", motor_ia.SYSTEM_PROMPT.strip())
+    
+    database.guardar_mensaje(numero, "user", texto)
+    
+    # Recargar historial para la IA
+    mensajes_completos = database.obtener_mensajes(numero)
+    mensajes_ia = [{"role": m["role"], "content": m["content"]} for m in mensajes_completos]
+
+    try:
+        # Llamamos al motor centralizado para obtener la respuesta
+        bot_respuesta = motor_ia.obtener_respuesta_ia(mensajes_ia)
+        
+        database.guardar_mensaje(numero, "assistant", bot_respuesta)
+        
+        if "A: " in bot_respuesta and "B: " in bot_respuesta and "C: " in bot_respuesta:
+            logger.info(f"[SISTEMA] Diagnóstico finalizado para {numero}")
+            enviar_resumen_diagnostico(numero, mensajes_completos)
+            database.borrar_sesion(numero)
+            
+        return bot_respuesta
+    except Exception as e:
+        logger.error(f"[ERROR IA] {e}")
+        return "Disculpe, tuve un problema técnico. ¿Podemos retomar?"
+
