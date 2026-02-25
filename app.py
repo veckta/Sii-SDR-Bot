@@ -91,6 +91,7 @@ def verificar_webhook(request: Request):
 async def recibir_mensaje_whatsapp(request: Request):
     try:
         body = await request.json()
+        logger.info(f"[META RAW PAYLOAD] {json.dumps(body)}")
         if not body.get("object"): raise HTTPException(status_code=404)
         
         for entry in body.get("entry", []):
