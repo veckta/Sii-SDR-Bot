@@ -1,8 +1,8 @@
 ﻿import os
 from openai import OpenAI
 
-# Inicializamos el cliente de OpenAI
-client = OpenAI()
+# Inicializamos el cliente de OpenAI (agregamos llave dummy para evasión de crash en nube)
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "dummy_key_para_evitar_crash"))
 
 def transcribir_audio_whisper(ruta_archivo_audio: str) -> str:
     """
