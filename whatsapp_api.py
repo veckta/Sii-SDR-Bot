@@ -42,10 +42,6 @@ def enviar_mensaje_texto(numero_destino: str, texto: str):
         print(f"[Simulador Salida] A {numero_destino}: {texto}")
         return 200
         
-    # Corrección de Sandbox Meta (Formato Argentina 549 vs 54...15)
-    if numero_destino == "5492216146709":
-        numero_destino = "54221156146709"
-        
     url = f"https://graph.facebook.com/{GRAPH_API_VERSION}/{PHONE_NUMBER_ID}/messages"
     payload = {
         "messaging_product": "whatsapp",
@@ -61,10 +57,6 @@ def enviar_mensaje_audio(numero_destino: str, ruta_audio_local: str):
     if not WHATSAPP_TOKEN or not PHONE_NUMBER_ID:
         print(f"[Simulador Salida] A {numero_destino}: (Audio MP3 = {ruta_audio_local})")
         return 200
-        
-    # Corrección de Sandbox Meta (Formato Argentina 549 vs 54...15)
-    if numero_destino == "5492216146709":
-        numero_destino = "54221156146709"
         
     # 1. Subir el archivo multimedia (Audio) a Meta
     url_media = f"https://graph.facebook.com/{GRAPH_API_VERSION}/{PHONE_NUMBER_ID}/media"
