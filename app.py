@@ -24,7 +24,8 @@ try:
 except Exception:
     logging.basicConfig(level=logging.INFO, format="%(message)s", handlers=[logging.StreamHandler(sys.stdout)])
 
-logger = logging.getLogger("SII-PRO")
+logger = logging.getLogger("SII-ULTRA-PRO")
+logger.info("=== REINICIO DE SISTEMA SII ULTRA PRO ===")
 
 app = FastAPI(title="SII Chatbot Pro - Backend")
 
