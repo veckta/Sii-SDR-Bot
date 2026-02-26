@@ -193,13 +193,24 @@ def procesar_respuesta(numero, texto, background_tasks: BackgroundTasks = None):
         
         # Registro Asíncrono en Supabase (Assistant)
         if background_tasks:
-             # Aquí podríamos extraer clasificación si se detecta cierre de venta
+             # Extracción robusta de clasificación (Case-insensitive)
              clasif = None
-             if "Abono Antigravity" in bot_respuesta: clasif = "Abono"
-             elif "Especialista" in bot_respuesta: clasif = "Alta Escala"
-             elif "exclusivos para comercios" in bot_respuesta: clasif = "Rechazo"
+             resp_lower = bot_respuesta.lower()
              
+             if "abono" in resp_lower or "antigravity" in resp_lower: 
+                 clasif = "Abono"
+             elif "especialista" in resp_lower or "implementación" in resp_lower: 
+                 clasif = "Alta Escala"
+             elif "exclusivos para comercios" in resp_lower: 
+                 clasif = "Rechazo"
+             
+             # Registramos este mensaje específico
              background_tasks.add_task(supabase_db.registrar_mensaje, numero, "assistant", bot_respuesta, clasif)
+             
+             # Si detectamos clasificación, actualizamos TODO el historial del usuario en Supabase (Retroactivo)
+             if clasif:
+                 logger.info(f"[SDR] Lead clasificado como {clasif} para {numero}. Actualizando historial en Supabase.")
+                 background_tasks.add_task(supabase_db.actualizar_etiqueta_usuario, numero, clasif)
 
         if "A: " in bot_respuesta and "B: " in bot_respuesta and "C: " in bot_respuesta:
             logger.info(f"[SISTEMA] Diagnóstico finalizado para {numero}")
