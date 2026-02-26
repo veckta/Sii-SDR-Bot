@@ -1,0 +1,552 @@
+[
+  {
+    "id": 1,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Depósito San Lorenzo (3 equipos)",
+    "fases": [
+      "Tengo un Depósito chico en San Lorenzo.",
+      "Uso 3 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 2,
+    "tipo": "B2C",
+    "nombre": "Particular en Gonnet",
+    "fases": [
+      "Hola, ¿hacen alarmas para casas?",
+      "Es mi domicilio particular en Gonnet.",
+      "Necesito que me avise al cel si entran."
+    ],
+    "objetivo_esperado": "RECHAZAR_AMABLEMENTE"
+  },
+  {
+    "id": 3,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Kiosco Berisso (3 equipos)",
+    "fases": [
+      "Tengo un Kiosco chico en Berisso.",
+      "Uso 3 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 4,
+    "tipo": "B2C",
+    "nombre": "Particular en Los Hornos",
+    "fases": [
+      "Hola, ¿hacen alarmas para casas?",
+      "Es mi domicilio particular en Los Hornos.",
+      "Necesito que me avise al cel si entran."
+    ],
+    "objetivo_esperado": "RECHAZAR_AMABLEMENTE"
+  },
+  {
+    "id": 5,
+    "tipo": "B2C",
+    "nombre": "Particular en Berisso",
+    "fases": [
+      "Hola, ¿hacen alarmas para casas?",
+      "Es mi domicilio particular en Berisso.",
+      "Necesito que me avise al cel si entran."
+    ],
+    "objetivo_esperado": "RECHAZAR_AMABLEMENTE"
+  },
+  {
+    "id": 6,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua Calle 12",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 7,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua City Bell",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 8,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Frigorífico Calle 12 (9 equipos)",
+    "fases": [
+      "Hola, hablo desde un Frigorífico en Calle 12.",
+      "Tengo 9 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 9,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Autoservicio Centro (2 equipos)",
+    "fases": [
+      "Tengo un Autoservicio chico en Centro.",
+      "Uso 2 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 10,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua San Lorenzo",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 11,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Frigorífico Tolosa (2 equipos)",
+    "fases": [
+      "Tengo un Frigorífico chico en Tolosa.",
+      "Uso 2 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 12,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua Ensenada",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 13,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua Tolosa",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 14,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Autoservicio San Lorenzo (2 equipos)",
+    "fases": [
+      "Tengo un Autoservicio chico en San Lorenzo.",
+      "Uso 2 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 15,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Kiosco San Lorenzo (1 equipos)",
+    "fases": [
+      "Tengo un Kiosco chico en San Lorenzo.",
+      "Uso 1 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 16,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Depósito Gonnet (2 equipos)",
+    "fases": [
+      "Tengo un Depósito chico en Gonnet.",
+      "Uso 2 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 17,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua San Lorenzo",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 18,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Autoservicio Los Hornos (1 equipos)",
+    "fases": [
+      "Tengo un Autoservicio chico en Los Hornos.",
+      "Uso 1 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 19,
+    "tipo": "B2C",
+    "nombre": "Particular en Gonnet",
+    "fases": [
+      "Hola, ¿hacen alarmas para casas?",
+      "Es mi domicilio particular en Gonnet.",
+      "Necesito que me avise al cel si entran."
+    ],
+    "objetivo_esperado": "RECHAZAR_AMABLEMENTE"
+  },
+  {
+    "id": 20,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Depósito Centro (7 equipos)",
+    "fases": [
+      "Hola, hablo desde un Depósito en Centro.",
+      "Tengo 7 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 21,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Heladería San Lorenzo (1 equipos)",
+    "fases": [
+      "Tengo un Heladería chico en San Lorenzo.",
+      "Uso 1 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 22,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua Calle 12",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 23,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Frigorífico Tolosa (5 equipos)",
+    "fases": [
+      "Hola, hablo desde un Frigorífico en Tolosa.",
+      "Tengo 5 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 24,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Carnicería City Bell (1 equipos)",
+    "fases": [
+      "Tengo un Carnicería chico en City Bell.",
+      "Uso 1 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 25,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Carnicería City Bell (1 equipos)",
+    "fases": [
+      "Tengo un Carnicería chico en City Bell.",
+      "Uso 1 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 26,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Heladería Centro (8 equipos)",
+    "fases": [
+      "Hola, hablo desde un Heladería en Centro.",
+      "Tengo 8 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 27,
+    "tipo": "B2C",
+    "nombre": "Particular en Ensenada",
+    "fases": [
+      "Hola, ¿hacen alarmas para casas?",
+      "Es mi domicilio particular en Ensenada.",
+      "Necesito que me avise al cel si entran."
+    ],
+    "objetivo_esperado": "RECHAZAR_AMABLEMENTE"
+  },
+  {
+    "id": 28,
+    "tipo": "B2C",
+    "nombre": "Particular en Tolosa",
+    "fases": [
+      "Hola, ¿hacen alarmas para casas?",
+      "Es mi domicilio particular en Tolosa.",
+      "Necesito que me avise al cel si entran."
+    ],
+    "objetivo_esperado": "RECHAZAR_AMABLEMENTE"
+  },
+  {
+    "id": 29,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Frigorífico Berisso (6 equipos)",
+    "fases": [
+      "Hola, hablo desde un Frigorífico en Berisso.",
+      "Tengo 6 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 30,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Frigorífico San Lorenzo (1 equipos)",
+    "fases": [
+      "Tengo un Frigorífico chico en San Lorenzo.",
+      "Uso 1 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 31,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Kiosco Gonnet (1 equipos)",
+    "fases": [
+      "Tengo un Kiosco chico en Gonnet.",
+      "Uso 1 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 32,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Carnicería Villa Elvira (11 equipos)",
+    "fases": [
+      "Hola, hablo desde un Carnicería en Villa Elvira.",
+      "Tengo 11 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 33,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Carnicería Ensenada (7 equipos)",
+    "fases": [
+      "Hola, hablo desde un Carnicería en Ensenada.",
+      "Tengo 7 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 34,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Kiosco Centro (12 equipos)",
+    "fases": [
+      "Hola, hablo desde un Kiosco en Centro.",
+      "Tengo 12 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 35,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua Calle 12",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 36,
+    "tipo": "B2C",
+    "nombre": "Particular en Calle 12",
+    "fases": [
+      "Hola, ¿hacen alarmas para casas?",
+      "Es mi domicilio particular en Calle 12.",
+      "Necesito que me avise al cel si entran."
+    ],
+    "objetivo_esperado": "RECHAZAR_AMABLEMENTE"
+  },
+  {
+    "id": 37,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua Los Hornos",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 38,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua Gonnet",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 39,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Frigorífico Centro (12 equipos)",
+    "fases": [
+      "Hola, hablo desde un Frigorífico en Centro.",
+      "Tengo 12 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 40,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua Gonnet",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 41,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua City Bell",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 42,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua Villa Elvira",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 43,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Autoservicio Calle 12 (1 equipos)",
+    "fases": [
+      "Tengo un Autoservicio chico en Calle 12.",
+      "Uso 1 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  },
+  {
+    "id": 44,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Autoservicio Berisso (7 equipos)",
+    "fases": [
+      "Hola, hablo desde un Autoservicio en Berisso.",
+      "Tengo 7 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 45,
+    "tipo": "AMBIGUO",
+    "nombre": "Consulta Ambigua Gonnet",
+    "fases": [
+      "Buenas, me pasaron este contacto.",
+      "¿Qué servicios ofrecen?",
+      "Tengo un negocio pequeño."
+    ],
+    "objetivo_esperado": "INDAGAR_DETALLES"
+  },
+  {
+    "id": 46,
+    "tipo": "B2C",
+    "nombre": "Particular en San Lorenzo",
+    "fases": [
+      "Hola, ¿hacen alarmas para casas?",
+      "Es mi domicilio particular en San Lorenzo.",
+      "Necesito que me avise al cel si entran."
+    ],
+    "objetivo_esperado": "RECHAZAR_AMABLEMENTE"
+  },
+  {
+    "id": 47,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Supermercado City Bell (9 equipos)",
+    "fases": [
+      "Hola, hablo desde un Supermercado en City Bell.",
+      "Tengo 9 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 48,
+    "tipo": "B2B_ALTA",
+    "nombre": "Lead Frigorífico Ensenada (5 equipos)",
+    "fases": [
+      "Hola, hablo desde un Frigorífico en Ensenada.",
+      "Tengo 5 equipos de frío que necesitan control.",
+      "¿Tienen servicio para empresas grandes?"
+    ],
+    "objetivo_esperado": "DERIVAR_ESPECIALISTA"
+  },
+  {
+    "id": 49,
+    "tipo": "B2C",
+    "nombre": "Particular en Centro",
+    "fases": [
+      "Hola, ¿hacen alarmas para casas?",
+      "Es mi domicilio particular en Centro.",
+      "Necesito que me avise al cel si entran."
+    ],
+    "objetivo_esperado": "RECHAZAR_AMABLEMENTE"
+  },
+  {
+    "id": 50,
+    "tipo": "B2B_BAJA",
+    "nombre": "Local Supermercado Gonnet (3 equipos)",
+    "fases": [
+      "Tengo un Supermercado chico en Gonnet.",
+      "Uso 3 heladeras nada más.",
+      "Quiero saber el precio del sensor mensual."
+    ],
+    "objetivo_esperado": "OFRECER_ABONO"
+  }
+]

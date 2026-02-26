@@ -1,0 +1,47 @@
+
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>SII Command Center</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            :root { --bg: #0d0d0d; --green: #00ff41; --text: #e0e0e0; --accent: #007bff; }
+            body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 20px; }
+            .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
+            .status { background: #1a1a1a; padding: 5px 15px; border-radius: 20px; color: var(--green); font-size: 12px; border: 1px solid var(--green); }
+            pre { background: #151515; padding: 15px; border-radius: 8px; font-size: 13px; line-height: 1.5; overflow-x: auto; border: 1px solid #333; color: #a5a5a5; white-space: pre-wrap; }
+            .highlight { color: var(--green); font-weight: bold; }
+            .out { color: #00ccff; }
+        </style>
+        <script>
+            setTimeout(() => location.reload(), 3000);
+            window.onload = () => window.scrollTo(0, document.body.scrollHeight);
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h2 style="margin:0; color:white;">⚡ SII <span style="color:var(--accent)">ULTRA</span></h2>
+            <div class="status">🟢 SISTEMA OPERATIVO</div>
+        </div>
+        <pre>=== REINICIO DE SISTEMA SII ULTRA PRO ===
+[META RAW PAYLOAD] {"object": "whatsapp_business_account", "entry": [{"id": "1462265622105671", "changes": [{"value": {"messaging_product": "whatsapp", "metadata": {"display_phone_number": "15551810262", "phone_number_id": "1051398318045924"}, "contacts": [{"profile": {"name": "Ariel"}, "wa_id": "5492216146709"}], "messages": [{"from": "5492216146709", "id": "wamid.HBgNNTQ5MjIxNjE0NjcwORUCABIYIEFDNzE2Qzg3Q0YzMDA5QkY4OUE5RjJENjc5QjYzNTREAA==", "timestamp": "1772059493", "text": {"body": "Hola"}, "type": "text"}]}, "field": "messages"}]}]}
+<span class='highlight'>[TEXTO ENTRANTE]</span> 5492216146709: Hola
+HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+-> [SALIDA] 5492216146709: Hola, gracias por contactarnos. Me llamo Veckta, Asistente Comercial de SII. ¿En qué podemos ayudarte hoy? ¿Estás buscando una solución para tu hogar o para una empresa?
+[META RAW PAYLOAD] {"object": "whatsapp_business_account", "entry": [{"id": "1462265622105671", "changes": [{"value": {"messaging_product": "whatsapp", "metadata": {"display_phone_number": "15551810262", "phone_number_id": "1051398318045924"}, "statuses": [{"id": "wamid.HBgNNTQ5MjIxNjE0NjcwORUCABEYEjRFMEUzNEUxNEZFNjY5MEU4MQA=", "status": "sent", "timestamp": "1772059496", "recipient_id": "5492216146709", "pricing": {"billable": false, "pricing_model": "PMP", "category": "service", "type": "free_customer_service"}}]}, "field": "messages"}]}]}
+[META RAW PAYLOAD] {"object": "whatsapp_business_account", "entry": [{"id": "1462265622105671", "changes": [{"value": {"messaging_product": "whatsapp", "metadata": {"display_phone_number": "15551810262", "phone_number_id": "1051398318045924"}, "statuses": [{"id": "wamid.HBgNNTQ5MjIxNjE0NjcwORUCABEYEjRFMEUzNEUxNEZFNjY5MEU4MQA=", "status": "delivered", "timestamp": "1772059497", "recipient_id": "5492216146709", "pricing": {"billable": false, "pricing_model": "PMP", "category": "service", "type": "free_customer_service"}}]}, "field": "messages"}]}]}
+[META RAW PAYLOAD] {"object": "whatsapp_business_account", "entry": [{"id": "1462265622105671", "changes": [{"value": {"messaging_product": "whatsapp", "metadata": {"display_phone_number": "15551810262", "phone_number_id": "1051398318045924"}, "statuses": [{"id": "wamid.HBgNNTQ5MjIxNjE0NjcwORUCABEYEjRFMEUzNEUxNEZFNjY5MEU4MQA=", "status": "read", "timestamp": "1772059497", "recipient_id": "5492216146709", "pricing": {"billable": false, "pricing_model": "PMP", "category": "service", "type": "free_customer_service"}}]}, "field": "messages"}]}]}
+[META RAW PAYLOAD] {"object": "whatsapp_business_account", "entry": [{"id": "1462265622105671", "changes": [{"value": {"messaging_product": "whatsapp", "metadata": {"display_phone_number": "15551810262", "phone_number_id": "1051398318045924"}, "contacts": [{"profile": {"name": "Ariel"}, "wa_id": "5492216146709"}], "messages": [{"from": "5492216146709", "id": "wamid.HBgNNTQ5MjIxNjE0NjcwORUCABIYIEFDRDMzNDlEMjUwOTJDNThEODY1NEYyQkU0MUFDRUEzAA==", "timestamp": "1772060972", "text": {"body": "Hola"}, "type": "text"}]}, "field": "messages"}]}]}
+<span class='highlight'>[TEXTO ENTRANTE]</span> 5492216146709: Hola
+HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+-> [SALIDA] 5492216146709: Hola, gracias por contactarnos. Me llamo Veckta, Asistente Comercial de SII. ¿En qué podemos ayudarte hoy? ¿Estás buscando una solución para tu hogar o para una empresa? 
+
+Por favor, proporciona más detalles para poder asistirte de la mejor manera posible.
+[META RAW PAYLOAD] {"object": "whatsapp_business_account", "entry": [{"id": "1462265622105671", "changes": [{"value": {"messaging_product": "whatsapp", "metadata": {"display_phone_number": "15551810262", "phone_number_id": "1051398318045924"}, "statuses": [{"id": "wamid.HBgNNTQ5MjIxNjE0NjcwORUCABEYEkFDNDc2Q0JCRENCMEYxNzZFRAA=", "status": "sent", "timestamp": "1772060975", "recipient_id": "5492216146709", "pricing": {"billable": false, "pricing_model": "PMP", "category": "service", "type": "free_customer_service"}}]}, "field": "messages"}]}]}
+[META RAW PAYLOAD] {"object": "whatsapp_business_account", "entry": [{"id": "1462265622105671", "changes": [{"value": {"messaging_product": "whatsapp", "metadata": {"display_phone_number": "15551810262", "phone_number_id": "1051398318045924"}, "statuses": [{"id": "wamid.HBgNNTQ5MjIxNjE0NjcwORUCABEYEkFDNDc2Q0JCRENCMEYxNzZFRAA=", "status": "delivered", "timestamp": "1772060975", "recipient_id": "5492216146709", "pricing": {"billable": false, "pricing_model": "PMP", "category": "service", "type": "free_customer_service"}}]}, "field": "messages"}]}]}
+[META RAW PAYLOAD] {"object": "whatsapp_business_account", "entry": [{"id": "1462265622105671", "changes": [{"value": {"messaging_product": "whatsapp", "metadata": {"display_phone_number": "15551810262", "phone_number_id": "1051398318045924"}, "statuses": [{"id": "wamid.HBgNNTQ5MjIxNjE0NjcwORUCABEYEkFDNDc2Q0JCRENCMEYxNzZFRAA=", "status": "read", "timestamp": "1772060975", "recipient_id": "5492216146709", "pricing": {"billable": false, "pricing_model": "PMP", "category": "service", "type": "free_customer_service"}}]}, "field": "messages"}]}]}
+</pre>
+    </body>
+    </html>
+    
