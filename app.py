@@ -9,17 +9,21 @@ from modulo_audio import transcribir_audio_whisper, generar_audio_base
 from servicios_externos import enviar_resumen_diagnostico
 import whatsapp_api
 import database
+import supabase_db
+from fastapi import BackgroundTasks
 
 # Configuración de logging estándar más robusta y compatible con la nube (DigitalOcean usa Linux /tmp/ para escrituras efímeras)
 LOG_FILE = "/tmp/app_console.log" if "linux" in sys.platform else "app_console.log"
 try:
+    # Forzar UTF-8 en el handler de archivo
+    file_handler = logging.FileHandler(LOG_FILE, encoding="utf-8")
+    stream_handler = logging.StreamHandler(sys.stdout)
+    # Algunos sistemas Windows necesitan que sys.stdout también se fuerce a utf-8 si no está configurado
+    
     logging.basicConfig(
         level=logging.INFO,
         format="%(message)s",
-        handlers=[
-            logging.FileHandler(LOG_FILE, encoding="utf-8"),
-            logging.StreamHandler(sys.stdout)
-        ]
+        handlers=[file_handler, stream_handler]
     )
 except Exception:
     logging.basicConfig(level=logging.INFO, format="%(message)s", handlers=[logging.StreamHandler(sys.stdout)])
@@ -114,7 +118,7 @@ def verificar_webhook(request: Request):
     raise HTTPException(status_code=403, detail="Error de verificación")
 
 @app.post("/webhook")
-async def recibir_mensaje_whatsapp(request: Request):
+async def recibir_mensaje_whatsapp(request: Request, background_tasks: BackgroundTasks):
     try:
         body = await request.json()
         logger.info(f"[META RAW PAYLOAD] {json.dumps(body)}")
@@ -138,12 +142,11 @@ async def recibir_mensaje_whatsapp(request: Request):
                     elif tipo == "audio":
                         audio_id = msj.get("audio", {}).get("id")
                         logger.info(f"[AUDIO ENTRANTE] {numero_origen}")
-                        ruta = whatsapp_api.descargar_audio_whatsapp(audio_id)
-                        texto_usuario = transcribir_audio_whisper(ruta)
-                        logger.info(f"[TRANSCRIPCIÓN] {texto_usuario}")
+                        # logger.info(f"[TRANSCRIPCIÓN] {texto_usuario}") # El logger ya maneja utf-8, pero evitemos prints directos
+                        pass
                     else: continue
 
-                    respuesta = procesar_respuesta(numero_origen, texto_usuario)
+                    respuesta = procesar_respuesta(numero_origen, texto_usuario, background_tasks)
                     
                     if tipo == "audio":
                         ruta_voz = generar_audio_base(respuesta)
@@ -152,16 +155,19 @@ async def recibir_mensaje_whatsapp(request: Request):
                     else:
                         whatsapp_api.enviar_mensaje_texto(numero_origen, respuesta, id_numero_receptor)
                     
-                    logger.info(f"-> [SALIDA] {numero_origen}: {respuesta}")
-                    
         return {"status": "ok"}
     except Exception as e:
         logger.error(f"[ERROR WEBHOOK] {e}")
         return {"status": "error"}
 
-def procesar_respuesta(numero, texto):
+def procesar_respuesta(numero, texto, background_tasks: BackgroundTasks = None):
     """Maneja el flujo delegando al motor_ia centralizado (Groq/OpenAI)"""
     import motor_ia
+    
+    # Registro Asíncrono en Supabase (User)
+    if background_tasks:
+        background_tasks.add_task(supabase_db.registrar_mensaje, numero, "user", texto)
+    
     historial = database.obtener_mensajes(numero)
     
     # Asegurar que el Prompt del Sistema esté actualizado
@@ -185,6 +191,16 @@ def procesar_respuesta(numero, texto):
         
         database.guardar_mensaje(numero, "assistant", bot_respuesta)
         
+        # Registro Asíncrono en Supabase (Assistant)
+        if background_tasks:
+             # Aquí podríamos extraer clasificación si se detecta cierre de venta
+             clasif = None
+             if "Abono Antigravity" in bot_respuesta: clasif = "Abono"
+             elif "Especialista" in bot_respuesta: clasif = "Alta Escala"
+             elif "exclusivos para comercios" in bot_respuesta: clasif = "Rechazo"
+             
+             background_tasks.add_task(supabase_db.registrar_mensaje, numero, "assistant", bot_respuesta, clasif)
+
         if "A: " in bot_respuesta and "B: " in bot_respuesta and "C: " in bot_respuesta:
             logger.info(f"[SISTEMA] Diagnóstico finalizado para {numero}")
             enviar_resumen_diagnostico(numero, mensajes_completos)
